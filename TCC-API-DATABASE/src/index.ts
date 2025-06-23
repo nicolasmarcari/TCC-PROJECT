@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectDB } from './config/dbConnect';
+import { connectDB, database } from './config/dbConnect';
 import vehicleRoute from './routes/vehicleRoute';
 
 const app = express();
@@ -11,8 +11,8 @@ app.get('/ping', (req, res) => {
 })
 app.use('/', vehicleRoute);
 
-connectDB().then(() => {
+database.connect().then(() => {
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
-    })
-})
+    });
+});

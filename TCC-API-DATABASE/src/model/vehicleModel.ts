@@ -6,6 +6,7 @@ const vehicleDataSchema = new mongoose.Schema<VehicleType>({
     tipo_combustivel: String,
     distancia_percorrida: Number,
     eficiencia: Number,
+    pegada_de_carbono: Number,
     uuid: String
 }, { versionKey: false });
 
