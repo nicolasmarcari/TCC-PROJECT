@@ -1,5 +1,16 @@
 package com.edu.tcc.carbon.carbon.dto;
 
-public class CalculationRequestDTO {
+import java.util.UUID;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class CalculationRequestDTO {
+    UUID id;
+    String vehicle;
+    int typeOfFuel;
+    int distanceTraveled;
+    double efficiency;
 }
