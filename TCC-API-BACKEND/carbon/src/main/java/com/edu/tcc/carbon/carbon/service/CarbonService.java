@@ -7,16 +7,18 @@ import org.springframework.stereotype.Service;
 import com.edu.tcc.carbon.carbon.dto.CalculationRequestDTO;
 import com.edu.tcc.carbon.carbon.dto.CalculationResponseDTO;
 import com.edu.tcc.carbon.carbon.dto.dtoUser.CalculationRequestUserDTO;
+import com.edu.tcc.carbon.carbon.exceptions.FuelNotFoundException;
 
 @Service
 public class CarbonService {
+    CalculationRequestDTO calculationRequest = new CalculationRequestDTO();
+    private final double fatorGasolina = 0.5;
+    private final double fatorDiesel = 0.6;
     public CalculationResponseDTO getCarbon(CalculationRequestUserDTO request) {
         //TODO: inserir fatores corretos (Os dados reais serão passados pelo Maycon.)
-        final double fatorGasolina = 0.5;
-        final double fatorDiesel = 0.6;
 
-        CalculationRequestDTO calculationRequest = new CalculationRequestDTO();
 
+        //Tranferindo os dados para o DTO
         calculationRequest.setId(UUID.randomUUID());
         calculationRequest.setVehicle(request.getVehicle());
         //0 = diesel or 1= gasoline
@@ -24,7 +26,8 @@ public class CarbonService {
         calculationRequest.setDistanceTraveled(request.getDistanceTraveled());
         calculationRequest.setEfficiency(request.getEfficiency());
 
-        //Lógica do aplicação:
+        CalculationResponseDTO calculationResponse = new CalculationResponseDTO();
+
         //Consumo de combustível = Distância * Eficiência
         double fuelConsumption = calculationRequest.getDistanceTraveled() * calculationRequest.getEfficiency();
         
@@ -37,12 +40,13 @@ public class CarbonService {
                 carbonFootprint = fuelConsumption * fatorGasolina;
                 break;
             default:
-                break;
-        }
-
-        CalculationResponseDTO calculationResponse = new CalculationResponseDTO(
-            calculationRequest.getId(),
-            carbonFootprint);
-        return calculationResponse;
+                throw new FuelNotFoundException();
+            }
+            calculationResponse.setCarbonFootprint(carbonFootprint);
+            calculationResponse.setId(calculationRequest.getId());
+            return calculationResponse;
+    }
+    public CalculationRequestDTO getAllData() {
+        return calculationRequest;
     }
 }
