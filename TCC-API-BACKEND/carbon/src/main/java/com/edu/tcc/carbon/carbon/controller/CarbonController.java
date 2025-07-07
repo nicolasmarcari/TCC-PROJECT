@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.edu.tcc.carbon.carbon.dto.CalculationResponseAllDataDTO;
 import com.edu.tcc.carbon.carbon.dto.CalculationResponseDTO;
 import com.edu.tcc.carbon.carbon.dto.dtoUser.CalculationRequestUserDTO;
 import com.edu.tcc.carbon.carbon.service.CarbonService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -23,10 +25,13 @@ public class CarbonController {
 
     @PostMapping("/sendCarbon")
     public @ResponseBody ResponseEntity<CalculationResponseDTO> getMethodName(@RequestBody CalculationRequestUserDTO requestDTO) {
+        
         //Incluir URL para fazer o post
+        CalculationResponseDTO response = carbonService.getCarbon(requestDTO);
         String url = "http://localhost:3000/saveVehicle";
-        restTemplate.postForObject(url, carbonService.getAllData(), String.class);
-        carbonService.getCarbon(requestDTO);
+        CalculationResponseAllDataDTO allData = carbonService.getAllData(response);
+        restTemplate.postForObject(url,allData,String.class);
+        
         return ResponseEntity.ok().body(carbonService.getCarbon(requestDTO));
     }
 }
