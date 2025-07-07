@@ -10,7 +10,7 @@ import lombok.Setter;
 public class CalculationRequestDTO {
     UUID id;
     String vehicle;
-    int typeOfFuel;
+    String typeOfFuel;
     int distanceTraveled;
     double efficiency;
 }
