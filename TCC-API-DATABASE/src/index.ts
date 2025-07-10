@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectDB, database } from './config/dbConnect';
+import { database } from './config/dbConnect';
 import vehicleRoute from './routes/vehicleRoute';
 
 const app = express();
