@@ -1,6 +1,7 @@
 package com.edu.tcc.carbon.carbon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +22,13 @@ public class CarbonController {
     @Autowired
     private CarbonService carbonService;
     private final RestTemplate restTemplate = new RestTemplate();
-
+    @Value("${carbon.api.token}")
+    private String apiKey;
     @PostMapping("/sendCarbon")
     public @ResponseBody ResponseEntity<CalculationResponseDTO> getMethodName(@RequestBody CalculationRequestUserDTO requestDTO) {
         
+
+
         CalculationResponseDTO response = carbonService.getCarbon(requestDTO);
         try{
             String url = "http://localhost:3000/saveVehicle";
@@ -34,6 +38,6 @@ public class CarbonController {
             throw new PostRequestException();
         }
         
-        return ResponseEntity.ok().header("Authorization", "TOKEN_LINDO_MARAVILHOSO").body(carbonService.getCarbon(requestDTO));
+        return ResponseEntity.ok().header("Authorization", apiKey).body(carbonService.getCarbon(requestDTO));
     }
 }
