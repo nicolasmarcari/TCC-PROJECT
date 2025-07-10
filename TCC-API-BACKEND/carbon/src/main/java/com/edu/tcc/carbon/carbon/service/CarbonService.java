@@ -16,16 +16,14 @@ public class CarbonService {
     CalculationResponseDTO calculationResponse = new CalculationResponseDTO();
     UUID id = UUID.randomUUID();
 
-    private final double fatorGasolina = 0.5;
-    private final double fatorDiesel = 0.6;
+    //Validar valores dos fator com Maycon
+    private final double fatorGasolina = 2.31;
+    private final double fatorDiesel = 2.42;
     public CalculationResponseDTO getCarbon(CalculationRequestUserDTO request) {
-        //TODO: inserir fatores corretos (Os dados reais serão passados pelo Maycon.)
-
 
         //Tranferindo os dados para o DTO
         calculationRequest.setId(id);
         calculationRequest.setVehicle(request.getVehicle());
-        //0 = diesel or 1= gasoline
         calculationRequest.setTypeOfFuel(request.getTypeOfFuel());
         calculationRequest.setDistanceTraveled(request.getDistanceTraveled());
         calculationRequest.setEfficiency(request.getEfficiency());

@@ -8,7 +8,7 @@ import lombok.Setter;
 public class FuelNotFoundException extends RuntimeException {
 
     public FuelNotFoundException() {
-        super("Type of Fuel not found.");
+        super("Tipo de Combustível inválido.");
     }
 
     public FuelNotFoundException(String message) {
