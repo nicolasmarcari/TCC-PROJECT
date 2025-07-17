@@ -1,7 +1,9 @@
 package com.edu.tcc.carbon.carbon.controller;
 
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +16,6 @@ import com.edu.tcc.carbon.carbon.dto.CalculationResponseAllDataDTO;
 import com.edu.tcc.carbon.carbon.dto.CalculationResponseDTO;
 import com.edu.tcc.carbon.carbon.dto.dtoUser.CalculationRequestUserDTO;
 import com.edu.tcc.carbon.carbon.service.CarbonService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api")
@@ -22,16 +23,23 @@ public class CarbonController {
     @Autowired
     private CarbonService carbonService;
     private final RestTemplate restTemplate = new RestTemplate();
-
+    private final HttpHeaders headers = new HttpHeaders();
+    @Value("${api.authorization.token}")
+    private String authorizationToken;
+    
     @PostMapping("/sendCarbon")
     public @ResponseBody ResponseEntity<CalculationResponseDTO> getMethodName(@RequestBody CalculationRequestUserDTO requestDTO) {
+        headers.set("Authorization", authorizationToken);
         
-        //Incluir URL para fazer o post
         CalculationResponseDTO response = carbonService.getCarbon(requestDTO);
-        String url = "http://localhost:3000/saveVehicle";
         CalculationResponseAllDataDTO allData = carbonService.getAllData(response);
-        restTemplate.postForObject(url,allData,String.class);
+
+        HttpEntity<CalculationResponseAllDataDTO> entityPost = new HttpEntity<>(allData, headers);
         
+        //Realizar Post
+        String url = "http://localhost:3000/saveVehicle";
+        restTemplate.postForEntity(url,entityPost,String.class);
+
         return ResponseEntity.ok().body(carbonService.getCarbon(requestDTO));
     }
 }
