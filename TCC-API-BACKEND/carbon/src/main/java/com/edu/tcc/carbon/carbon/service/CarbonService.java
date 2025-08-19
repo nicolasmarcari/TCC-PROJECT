@@ -16,8 +16,8 @@ public class CarbonService {
     CalculationResponseDTO calculationResponse = new CalculationResponseDTO();
     UUID id = UUID.randomUUID();
 
-    private final double fatorGasolina = 0.5;
-    private final double fatorDiesel = 0.6;
+    private final double fatorGasolina = 2.28;
+    private final double fatorDiesel = 2.6;
     public CalculationResponseDTO getCarbon(CalculationRequestUserDTO request) {
         //TODO: inserir fatores corretos (Os dados reais serão passados pelo Maycon.)
 
@@ -31,7 +31,7 @@ public class CarbonService {
         calculationRequest.setEfficiency(request.getEfficiency());
 
         //Consumo de combustível = Distância * Eficiência
-        double fuelConsumption = calculationRequest.getDistanceTraveled() * calculationRequest.getEfficiency();
+        double fuelConsumption = calculationRequest.getDistanceTraveled() / calculationRequest.getEfficiency();
         
         double carbonFootprint = 0.0;
         switch (calculationRequest.getTypeOfFuel().strip().toLowerCase()) {
