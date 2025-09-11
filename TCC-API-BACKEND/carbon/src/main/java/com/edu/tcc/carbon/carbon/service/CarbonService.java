@@ -24,7 +24,7 @@ public class CarbonService {
 
 
         //Tranferindo os dados para o DTO
-        calculationRequest.setId(id);
+        calculationRequest.setId(this.id);
         calculationRequest.setVehicle(request.getVehicle());
         //0 = diesel or 1= gasoline
         calculationRequest.setTypeOfFuel(request.getTypeOfFuel());
@@ -47,7 +47,7 @@ public class CarbonService {
             }
         
         calculationResponse.setCarbonFootprint(carbonFootprint);
-        calculationResponse.setId(id);
+        calculationResponse.setId(this.id);
         return calculationResponse;
     }
 
@@ -59,7 +59,7 @@ public class CarbonService {
         calculationRequestAllData.setDistanceTraveled(calculationRequest.getDistanceTraveled());
         calculationRequestAllData.setEfficiency(calculationRequest.getEfficiency());
         calculationRequestAllData.setCarbonFootprint(calculationResponse.getCarbonFootprint());
-        calculationRequestAllData.setId(id.toString());
+        calculationRequestAllData.setId(this.id.toString());
 
         return calculationRequestAllData;
     }
