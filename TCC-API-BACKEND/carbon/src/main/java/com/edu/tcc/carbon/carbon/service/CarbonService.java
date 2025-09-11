@@ -14,11 +14,12 @@ import com.edu.tcc.carbon.carbon.exceptions.FuelNotFoundException;
 public class CarbonService {
     CalculationRequestDTO calculationRequest = new CalculationRequestDTO();
     CalculationResponseDTO calculationResponse = new CalculationResponseDTO();
-    UUID id = UUID.randomUUID();
+    UUID id;
 
     private final double fatorGasolina = 2.28;
     private final double fatorDiesel = 2.6;
     public CalculationResponseDTO getCarbon(CalculationRequestUserDTO request) {
+        this.id = UUID.randomUUID();
         //TODO: inserir fatores corretos (Os dados reais serão passados pelo Maycon.)
 
 
