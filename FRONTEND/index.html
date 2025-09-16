@@ -3,36 +3,68 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Green API - Calculadora</title>
+    <title>Green API</title>
     <link rel="stylesheet" href="css/green_api.css">
 </head>
 
 <body>
     <div class="container">
-        <h2>Calcular Pegada de Carbono</h2>
-        <form id="formPegada">
-            <label for="veiculo">Veículo:</label>
-            <input type="text" id="veiculo" name="veiculo" required>
+        <!-- Menu -->
+        <div class="menu">
+            <button id="btnCalcular" class="ativo">Calcular</button>
+            <button id="btnConsultar">Consultar</button>
+        </div>
 
-            <label for="distancia">Distância percorrida (km):</label>
-            <input type="number" step="0.1" id="distancia" name="distancia" required>
+        <!-- Tela de Calcular -->
+        <div id="telaCalcular" class="tela ativa">
+            <h2>Calcular Pegada de Carbono</h2>
+            <form id="formPegada">
+                <label for="veiculo">Veículo:</label>
+                <input type="text" id="veiculo" name="veiculo" required>
 
-            <label for="eficiencia">Eficiência (km/l):</label>
-            <input type="number" step="0.1" id="eficiencia" name="eficiencia" required>
+                <label for="distancia">Distância percorrida (km):</label>
+                <input type="number" step="0.1" id="distancia" name="distancia" required>
 
-            <label for="combustivel">Combustível:</label>
-            <select id="combustivel" name="combustivel" required>
-                <option value="gasolina">Gasolina</option>
-                <option value="diesel">Diesel</option>
-            </select>
+                <label for="eficiencia">Eficiência (km/l):</label>
+                <input type="number" step="0.1" id="eficiencia" name="eficiencia" required>
 
-            <button type="submit">Calcular</button>
-        </form>
+                <label for="combustivel">Combustível:</label>
+                <select id="combustivel" name="combustivel" required>
+                    <option value="gasolina">Gasolina</option>
+                    <option value="diesel">Diesel</option>
+                </select>
 
-        <div id="resultado" class="resultado"></div>
-        <div id="erro" class="erro"></div>
-        <script src="js/green_api.js"></script>
+                <button type="submit">Calcular</button>
+            </form>
+
+            <div id="resultado" class="resultado"></div>
+            <div id="erro" class="erro"></div>
+        </div>
+
+        <!-- Tela de Consultar -->
+        <div id="telaConsultar" class="tela">
+            <h2>Consultar Resultados</h2>
+            <form id="formConsulta">
+                <label for="codigo">Código da consulta:</label>
+                <input type="text" id="codigo" name="codigo" required>
+                <button type="submit">Consultar</button>
+            </form>
+
+            <div id="resultadoConsulta" class="resultado"></div>
+            <div id="erroConsulta" class="erro"></div>
+
+            <!-- Botões de ação -->
+            <div class="botoesAcoes">
+                <button id="btnDownload" style="display:none;">
+                    <img src="img/download.png" alt="Download" style="width:20px; vertical-align:middle;">
+                    Download
+                </button>
+                <button id="btnLimpar" style="display:none;">Limpar</button>
+            </div>
+        </div>
     </div>
+
+    <script src="js/green_api.js"></script>
 </body>
 
 </html>
