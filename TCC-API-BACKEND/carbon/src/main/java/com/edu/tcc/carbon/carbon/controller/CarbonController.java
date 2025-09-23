@@ -25,7 +25,7 @@ import com.edu.tcc.carbon.carbon.service.CarbonService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin()
 public class CarbonController {
     @Autowired
     private CarbonService carbonService;
