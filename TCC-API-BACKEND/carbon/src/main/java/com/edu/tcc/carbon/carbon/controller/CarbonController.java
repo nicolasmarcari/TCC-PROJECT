@@ -6,7 +6,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,7 @@ import com.edu.tcc.carbon.carbon.service.CarbonService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin()
 public class CarbonController {
     @Autowired
     private CarbonService carbonService;
@@ -44,10 +47,10 @@ public class CarbonController {
         String url = "http://localhost:3000/saveVehicle";
         restTemplate.postForEntity(url,entityPost,String.class);
 
-        return ResponseEntity.ok().body(carbonService.getCarbon(requestDTO));
+        return ResponseEntity.ok().body(response);
     }
     @GetMapping("/getVehicle/{uuid}")
-    public @ResponseBody ResponseEntity<String> getMethodName(@RequestParam String uuid) {
+    public @ResponseBody ResponseEntity<String> getMethodName(@PathVariable String uuid) {
         headers.set("Authorization", authorizationToken);
         
         HttpEntity<String> entityGet = new HttpEntity<>(headers);
