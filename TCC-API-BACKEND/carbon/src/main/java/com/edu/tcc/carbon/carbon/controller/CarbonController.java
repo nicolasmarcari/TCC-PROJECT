@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -44,7 +43,7 @@ public class CarbonController {
         HttpEntity<CalculationResponseAllDataDTO> entityPost = new HttpEntity<>(allData, headers);
         
         //Realizar Post
-        String url = "http://localhost:3000/saveVehicle";
+        String url = "http://api-database:3000/saveVehicle";
         restTemplate.postForEntity(url,entityPost,String.class);
 
         return ResponseEntity.ok().body(response);
@@ -54,9 +53,7 @@ public class CarbonController {
         headers.set("Authorization", authorizationToken);
         
         HttpEntity<String> entityGet = new HttpEntity<>(headers);
-        
-        String url = "http://localhost:3000/getVehicle/" + uuid;
-        
+        String url = "http://api-database:3000/getVehicle/" + uuid;
         ResponseEntity<String> response = restTemplate.exchange(
             url,
             HttpMethod.GET,
@@ -73,7 +70,6 @@ public class CarbonController {
         }else {
             return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
         }
-    
     
     }
 }

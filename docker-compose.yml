@@ -1,0 +1,44 @@
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: mongoDB
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    
+
+  api-database:
+    container_name: api-database
+    build:
+        context: ./TCC-API-DATABASE
+        dockerfile: Dockerfile
+    ports:
+        - "3000:3000"
+    env_file:
+        - ./TCC-API-DATABASE/.env
+    depends_on:
+        - mongo
+
+  api-backend:
+    container_name: api-backend
+    build:
+        context: ./TCC-API-BACKEND/carbon
+        dockerfile: Dockerfile
+    ports:
+        - "8080:8080"
+    depends_on:
+        - api-database
+    
+  frontend:
+    container_name: greenfootprint-frontend
+    build:
+        context: ./FRONTEND
+        dockerfile: Dockerfile
+    ports:
+    - "80:80"
+    depends_on:
+    - api-backend
+
+volumes:
+  mongo-data:

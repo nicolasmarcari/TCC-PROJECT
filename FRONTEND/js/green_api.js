@@ -15,7 +15,7 @@ document.getElementById("formPegada").addEventListener("submit", async function 
     };
 
     try {
-        const resposta = await fetch("http://localhost:8080/api/sendCarbon", {
+        const resposta = await fetch("/api/sendCarbon", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
@@ -24,11 +24,13 @@ document.getElementById("formPegada").addEventListener("submit", async function 
         if (!resposta.ok) throw new Error("Erro na requisição: " + resposta.status);
 
         const data = await resposta.json();
+        console.log(data)
 
         document.getElementById("resultado").style.display = "block";
         document.getElementById("erro").style.display = "none";
         document.getElementById("resultado").textContent =
-            "Pegada de Carbono: " + data.pegada_de_carbono.toFixed(2) + " kg CO₂e";
+        `Pegada de Carbono: ${data.pegada_de_carbono.toFixed(2)}kg CO₂e \n\n UUID: ${data.uuid}`
+            // "Pegada de Carbono: " + data.pegada_de_carbono.toFixed(2) + " kg CO₂e";
     } catch (error) {
         document.getElementById("erro").style.display = "block";
         document.getElementById("resultado").style.display = "none";
@@ -45,7 +47,7 @@ document.getElementById("formConsulta").addEventListener("submit", async functio
     const btnLimpar = document.getElementById("btnLimpar");
 
     try {
-        const resposta = await fetch(`http://localhost:8080/api/getVehicle/${codigo}`);
+        const resposta = await fetch(`/api/getVehicle/${codigo}`);
         if (!resposta.ok) throw new Error("Erro na consulta: " + resposta.status);
 
         const data = await resposta.json();
