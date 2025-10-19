@@ -1,6 +1,6 @@
 GUIA PARA RODAR DOCKER COMPOSE
 
-Inicialmente vá para a api-backend/carbon e rode o comando:
+Inicialmente vá para a tcc-api-backend/carbon e rode o comando:
 ```bash
 ./mvnw clean package
 
