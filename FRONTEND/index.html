@@ -34,10 +34,15 @@
                     <option value="diesel">Diesel</option>
                 </select>
 
-                <button type="submit">Calcular</button>
+                <div class="botoesAcoes">
+                    <button type="submit">Calcular</button>
+                </div>
             </form>
 
-            <div id="resultado" class="resultado"></div>
+            <div id="resultado" class="resultado">
+                <span id="textoResultado"></span>
+                <button id="btnCopiar" class="copiarBtn" style="display:none;">Copiar</button>
+            </div>
             <div id="erro" class="erro"></div>
         </div>
 
@@ -45,21 +50,19 @@
         <div id="telaConsultar" class="tela">
             <h2>Consultar Resultados</h2>
             <form id="formConsulta">
-                <label for="codigo">Código da consulta:</label>
-                <input type="text" id="codigo" name="codigo" required>
-                <button type="submit">Consultar</button>
+                <label for="codigo">Digite os códigos (pressione Enter após cada):</label>
+                <div id="uuidContainer" class="uuid-container">
+                    <input type="text" id="codigo" name="codigo" placeholder="Digite um UUID e pressione Enter">
+                </div>
+                <button type="submit">Gerar Relatório CSV</button>
             </form>
-
-            <div id="resultadoConsulta" class="resultado"></div>
-            <div id="erroConsulta" class="erro"></div>
 
             <!-- Botões de ação -->
             <div class="botoesAcoes">
                 <button id="btnDownload" style="display:none;">
-                    <img src="img/download.png" alt="Download" style="width:20px; vertical-align:middle;">
-                    Download
+                    <img src="img/download.png" alt="Download"> Download CSV
                 </button>
-                <button id="btnLimpar" style="display:none;">Limpar</button>
+                <button id="btnLimpar" style="display:none;">Limpar Tudo</button>
             </div>
         </div>
     </div>
