@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.edu.tcc.carbon.carbon.dto.CalculationRequestDTO;
+import com.edu.tcc.carbon.carbon.dto.CalculationRequestUserDTO;
 import com.edu.tcc.carbon.carbon.dto.CalculationResponseAllDataDTO;
 import com.edu.tcc.carbon.carbon.dto.CalculationResponseDTO;
-import com.edu.tcc.carbon.carbon.dto.dtoUser.CalculationRequestUserDTO;
 import com.edu.tcc.carbon.carbon.exceptions.FuelNotFoundException;
 
 @Service
