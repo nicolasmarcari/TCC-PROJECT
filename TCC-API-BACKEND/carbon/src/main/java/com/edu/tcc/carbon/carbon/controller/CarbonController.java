@@ -61,7 +61,7 @@ public class CarbonController {
         
         HttpEntity<String> entityGet = new HttpEntity<>(headers);
         //Realizar Get
-        String url = "http://api-database:3000/getVehicle/" + uuid;
+        String url = "http://localhost:3000/getVehicle/" + uuid;
         ResponseEntity<String> response = restTemplate.exchange(
             url,
             HttpMethod.GET,
