@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -46,7 +45,7 @@ public class CarbonController {
 
         HttpEntity<CalculationResponseAllDataDTO> entityPost = new HttpEntity<>(allData, headers);
         //Realizar Post
-        String url = "http://localhost:3000/saveVehicle";
+        String url = "http://api-database:3000/saveVehicle";
         ResponseEntity<String> responsePost = restTemplate.postForEntity(
             url,
             entityPost,
