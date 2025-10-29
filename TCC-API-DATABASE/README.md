@@ -121,9 +121,10 @@ ou
 
 Retorna o objeto do veiculo inteiro a partir do UUID que vai ser passado por parametro
 
-#### Parametros
-
+#### Parâmetros
+````
 http://url:port/UUID
+````
 
 #### Retornos
 
